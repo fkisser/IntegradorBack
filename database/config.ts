@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 
 export const dbConnection = async (): Promise<void> => {
 	try {
-		const dbURL =
-			"mongodb+srv://vercel-admin-user:q1rOI5Bhnqc5o5Ka@integrador.kzb8que.mongodb.net/test";
+		const dbURL = process.env.DB_URL;
 		console.log(dbURL);
 		if (!dbURL) {
 			throw new Error(
