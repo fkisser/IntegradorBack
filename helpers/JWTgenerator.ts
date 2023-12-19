@@ -7,7 +7,7 @@ export const JWTgenerator = (id: string = ""): Promise<string> => {
 		jwt.sign(
 			payload,
 			process.env.TOKENKEY as string,
-			{ expiresIn: "4h" },
+			// { expiresIn: "4h" },
 			(err: Error | null, token: string | undefined) => {
 				if (err) {
 					console.log(err);

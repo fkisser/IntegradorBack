@@ -1,13 +1,10 @@
 import { Model, Schema, model } from "mongoose";
-import { ROLES } from "../helpers/constants";
 
 export interface IUser {
 	name: string;
 	mail: string;
 	password: string;
-	role?: string;
-	code?: string;
-	verified?: string;
+	admin: boolean;
 }
 
 const UserSchema = new Schema<IUser>({
@@ -23,21 +20,14 @@ const UserSchema = new Schema<IUser>({
 		type: String,
 		required: [true, "La contraseña es obligatoria"],
 	},
-	role: {
-		type: String,
-		default: ROLES.user,
-	},
-	code: {
-		type: String,
-	},
-	verified: {
+	admin: {
 		type: Boolean,
 		default: false,
 	},
 });
 
 UserSchema.methods.toJSON = function () {
-	const { __v, password, _id, code, ...user } = this.toObject();
+	const { __v, password, admin, _id, ...user } = this.toObject();
 	return user;
 };
 
