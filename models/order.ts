@@ -24,7 +24,7 @@ export interface IOrder {
 	price: number;
 	shippingCost?: number;
 	items: IItem[];
-	shippingDetails: IShippingDetails;
+	shippingDetails?: IShippingDetails;
 	status?: string;
 	total: number;
 }

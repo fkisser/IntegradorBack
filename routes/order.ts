@@ -20,9 +20,6 @@ router.post(
 		check("items", "Debe haber al menos un producto en la orden").isArray({
 			min: 1,
 		}),
-		check("shippingDetails", "Los datos de envío son obligatorios")
-			.not()
-			.isEmpty(),
 		check("price", "El precio es obligatorio").not().isEmpty(),
 		orderValidator,
 		errorsCollector,
@@ -36,9 +33,6 @@ router.put(
 		check("items", "Debe haber al menos un producto en la orden").isArray({
 			min: 1,
 		}),
-		check("shippingDetails", "Los datos de envío son obligatorios")
-			.not()
-			.isEmpty(),
 		check("price", "El precio es obligatorio").not().isEmpty(),
 		orderValidator,
 		errorsCollector,
