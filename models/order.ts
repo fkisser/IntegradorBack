@@ -1,8 +1,7 @@
 import { Model, ObjectId, Schema, Types, model } from "mongoose";
 import { IShippingDetails, ShippingDetailsSchema } from "./shippingDetails";
-import { IProduct, ProductSchema } from "./product";
 
-interface IItem {
+export interface IItem {
 	product: ObjectId;
 	quantity: number;
 }
@@ -23,10 +22,10 @@ export interface IOrder {
 	createdAt: Date;
 	user: Types.ObjectId;
 	price: number;
-	shippingCost: number;
+	shippingCost?: number;
 	items: IItem[];
 	shippingDetails: IShippingDetails;
-	status: string;
+	status?: string;
 	total: number;
 }
 
@@ -46,21 +45,22 @@ const OrderSchema = new Schema<IOrder>({
 	},
 	shippingCost: {
 		type: Number,
-		required: true,
+		required: false,
+		default: 10,
 	},
 	items: {
-		type: [ProductSchema],
+		type: [ItemSchema],
 		required: true,
 		default: undefined,
 	},
 	shippingDetails: {
 		type: ShippingDetailsSchema,
-		required: true,
 		default: undefined,
 	},
 	status: {
 		type: String,
-		required: true,
+		required: false,
+		default: "pending",
 	},
 	total: {
 		type: Number,

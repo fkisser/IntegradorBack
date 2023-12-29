@@ -1,4 +1,4 @@
-import { Schema, model, Model, ObjectId } from "mongoose";
+import { Schema, model, Model } from "mongoose";
 
 export interface ICategory {
 	title: string;

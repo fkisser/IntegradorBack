@@ -6,10 +6,6 @@ import {
 	getProductById,
 	getProductsByCategory,
 	updateProduct,
-	// deleteCategory,
-	// getAllCategories,
-	// getCategoryByCode,
-	// updateCategory,
 } from "../controllers/product";
 import { check } from "express-validator";
 import { errorsCollector } from "../middlewares/errorsCollector";
@@ -45,9 +41,5 @@ router.delete(
 router.get("/", getAllProducts);
 router.get("/category/:CODE", getProductsByCategory);
 router.get("/product/:ID", getProductById);
-// router.get("/:CODE", getCategoryByCode);
-// router.put("/:CODE", updateCategory);
-// router.patch("/:CODE", updateCategory);
-// router.delete("/:CODE", deleteCategory);
 
 export default router;

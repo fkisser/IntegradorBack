@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Product, { IProduct } from "../models/product";
-import Category, { ICategory } from "../models/category";
+import Category from "../models/category";
 
 export const getAllProducts = async (req: Request, res: Response) => {
 	const products: IProduct[] = await Product.find().populate("category");
