@@ -66,9 +66,13 @@ export const createProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
 	const { ID } = req.params;
 	const { ...data } = req.body;
-	const product = await Product.findByIdAndUpdate(ID, data, {
-		new: true,
-	});
+	const product = await Product.findByIdAndUpdate(
+		ID,
+		{ ...data },
+		{
+			new: true,
+		}
+	);
 	if (!product) {
 		res.status(404).json({
 			msg: "Id de producto inválido",
