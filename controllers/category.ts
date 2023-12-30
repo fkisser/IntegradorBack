@@ -5,6 +5,7 @@ import Product from "../models/product";
 export const getAllCategories = async (req: Request, res: Response) => {
 	const categories: ICategory[] = await Category.find();
 	res.status(200).json({ categories });
+	return;
 };
 export const getCategoryByCode = async (req: Request, res: Response) => {
 	const { CODE } = req.params;
@@ -43,6 +44,7 @@ export const createCategory = async (req: Request, res: Response) => {
 		msg: "Categoría creada con éxito",
 		category,
 	});
+	return;
 };
 export const updateCategory = async (req: Request, res: Response) => {
 	const { CODE } = req.params;
@@ -69,6 +71,7 @@ export const updateCategory = async (req: Request, res: Response) => {
 		msg: "Categoría modificada con éxito",
 		category,
 	});
+	return;
 };
 export const deleteCategory = async (req: Request, res: Response) => {
 	const { CODE } = req.params;
@@ -77,6 +80,7 @@ export const deleteCategory = async (req: Request, res: Response) => {
 		res.status(404).json({
 			msg: "Código de categoría inválido",
 		});
+		return;
 	}
 	const products = await Product.find({ category: categoryId?._id });
 	if (products) {
@@ -93,4 +97,5 @@ export const deleteCategory = async (req: Request, res: Response) => {
 		category,
 		products,
 	});
+	return;
 };

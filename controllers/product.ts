@@ -72,6 +72,12 @@ export const createProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
 	const { ID } = req.params;
 	const data = req.body;
+	if (data.category) {
+		const categoryId = await Category.findOne({
+			code: data.category.trim(),
+		});
+		data.category = categoryId?._id;
+	}
 	const product = await Product.findByIdAndUpdate(
 		ID,
 		{ ...data },
