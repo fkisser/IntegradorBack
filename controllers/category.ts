@@ -80,7 +80,7 @@ export const deleteCategory = async (req: Request, res: Response) => {
 	}
 	const products = await Product.find({ category: categoryId?._id });
 	if (products) {
-		const categoryNone = await Category.findOne({ code: "none" });
+		const categoryNone = await Category.findOne({ code: "" });
 		products?.forEach(async (product) => {
 			await Product.findByIdAndUpdate(product._id, {
 				category: categoryNone?._id,
@@ -89,7 +89,8 @@ export const deleteCategory = async (req: Request, res: Response) => {
 	}
 	const category = await Category.findOneAndDelete({ code: CODE });
 	res.status(200).json({
-		msg: "Categoría eliminada con éxito. Los productos que estaban en esta categoría, se trasladaron a la categoría 'Sin categoría'",
+		msg: "Categoría eliminada con éxito. Los productos que estaban en esta categoría, se trasladaron a la categoría 'Todos', reasígnelos a otra categoría",
 		category,
+		products,
 	});
 };
