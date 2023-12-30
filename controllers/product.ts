@@ -7,6 +7,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
 	res.status(200).json({
 		products,
 	});
+	return;
 };
 export const getProductsByCategory = async (req: Request, res: Response) => {
 	const { CODE } = req.params;
@@ -15,6 +16,7 @@ export const getProductsByCategory = async (req: Request, res: Response) => {
 		res.status(404).json({
 			msg: "Código de categoría inválido",
 		});
+		return;
 	}
 	const products: IProduct[] = await Product.find({
 		category: categoryId?._id,
@@ -22,6 +24,7 @@ export const getProductsByCategory = async (req: Request, res: Response) => {
 	res.status(200).json({
 		products,
 	});
+	return;
 };
 export const getProductById = async (req: Request, res: Response) => {
 	const { ID } = req.params;
@@ -30,10 +33,12 @@ export const getProductById = async (req: Request, res: Response) => {
 		res.status(404).json({
 			msg: "Id de producto inválido",
 		});
+		return;
 	}
 	res.status(200).json({
 		product,
 	});
+	return;
 };
 
 export const createProduct = async (req: Request, res: Response) => {
@@ -62,6 +67,7 @@ export const createProduct = async (req: Request, res: Response) => {
 		msg: "Producto creado con éxito",
 		product,
 	});
+	return;
 };
 export const updateProduct = async (req: Request, res: Response) => {
 	const { ID } = req.params;
@@ -77,11 +83,13 @@ export const updateProduct = async (req: Request, res: Response) => {
 		res.status(404).json({
 			msg: "Id de producto inválido",
 		});
+		return;
 	}
 	res.status(200).json({
 		msg: "Producto actualizado con éxito",
 		product,
 	});
+	return;
 };
 export const deleteProduct = async (req: Request, res: Response) => {
 	const { ID } = req.params;
@@ -90,9 +98,11 @@ export const deleteProduct = async (req: Request, res: Response) => {
 		res.status(404).json({
 			msg: "Id de producto inválido",
 		});
+		return;
 	}
 	res.status(200).json({
 		msg: "Producto eliminado con éxito",
 		product,
 	});
+	return;
 };
