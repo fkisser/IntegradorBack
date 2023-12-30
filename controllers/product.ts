@@ -65,7 +65,7 @@ export const createProduct = async (req: Request, res: Response) => {
 };
 export const updateProduct = async (req: Request, res: Response) => {
 	const { ID } = req.params;
-	const { ...data } = req.body;
+	const data = req.body;
 	const product = await Product.findByIdAndUpdate(
 		ID,
 		{ ...data },
