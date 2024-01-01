@@ -75,6 +75,12 @@ export const updateCategory = async (req: Request, res: Response) => {
 };
 export const deleteCategory = async (req: Request, res: Response) => {
 	const { CODE } = req.params;
+	if (CODE === "") {
+		res.status(403).json({
+			msg: "Esta categoría se utiliza por defecto, no puede eliminarse",
+		});
+		return;
+	}
 	const categoryId = await Category.findOne({ code: CODE });
 	if (!categoryId) {
 		res.status(404).json({
