@@ -46,7 +46,7 @@ export const createProduct = async (req: Request, res: Response) => {
 	let categoryId;
 	if (!category) {
 		categoryId = await Category.findOne({
-			code: "none",
+			code: "",
 		});
 	} else {
 		categoryId = await Category.findOne({
