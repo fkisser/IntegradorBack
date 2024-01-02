@@ -66,7 +66,7 @@ export const getOrdersByStatus = async (req: Request, res: Response) => {
 };
 export const createOrder = async (req: Request, res: Response) => {
 	const { _id } = req.body.user;
-	const { items, shippingDetails, price }: IOrder = req.body;
+	const { items, shippingDetails, price, status }: IOrder = req.body;
 	const shippingCost = SHIPPING_COST;
 	const total = price + shippingCost;
 	const orderData: IOrder = {
@@ -75,7 +75,7 @@ export const createOrder = async (req: Request, res: Response) => {
 		price,
 		items,
 		shippingDetails,
-		status: "pending",
+		status,
 		total,
 	};
 	const order = new Order(orderData);
