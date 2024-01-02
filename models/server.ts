@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import cors from "cors";
+import mainRoutes from "../routes/main";
 import authRoutes from "../routes/auth";
 import productRoutes from "../routes/product";
 import categoryRoutes from "../routes/category";
@@ -9,6 +10,7 @@ import { dbConnection } from "../database/config";
 export class Server {
 	app: Express;
 	port: string | number | undefined;
+	mainPath: string;
 	authPath: string;
 	productPath: string;
 	categoryPath: string;
@@ -20,6 +22,7 @@ export class Server {
 		this.productPath = "/products";
 		this.categoryPath = "/categories";
 		this.orderPath = "/orders";
+		this.mainPath = "/";
 
 		this.dbConnect();
 		this.middlewares();
@@ -35,6 +38,7 @@ export class Server {
 	}
 
 	routes(): void {
+		this.app.use(this.mainPath, mainRoutes);
 		this.app.use(this.authPath, authRoutes);
 		this.app.use(this.productPath, productRoutes);
 		this.app.use(this.categoryPath, categoryRoutes);
