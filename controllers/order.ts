@@ -42,6 +42,28 @@ export const getOneById = async (req: Request, res: Response) => {
 	});
 	return;
 };
+export const getOrdersByStatus = async (req: Request, res: Response) => {
+	const { STATUS } = req.params;
+	const orders: IOrder[] = await Order.find({ status: STATUS })
+		.populate("user")
+		.populate({
+			path: "items",
+			populate: {
+				path: "product",
+				model: "Product",
+			},
+		});
+	if (!orders.length) {
+		res.status(404).json({
+			msj: "No existen órdenes con este estado para este usuario",
+		});
+		return;
+	}
+	res.status(200).json({
+		orders,
+	});
+	return;
+};
 export const createOrder = async (req: Request, res: Response) => {
 	const { _id } = req.body.user;
 	const { items, shippingDetails, price }: IOrder = req.body;

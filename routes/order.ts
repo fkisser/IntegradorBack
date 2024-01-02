@@ -4,6 +4,7 @@ import {
 	deleteOrder,
 	getAllFromUser,
 	getOneById,
+	getOrdersByStatus,
 	updateOrder,
 } from "../controllers/order";
 import jwtValidator from "../middlewares/jwtValidator";
@@ -13,6 +14,11 @@ import { orderValidator } from "../middlewares/orderValidator";
 const router = Router();
 router.get("/", [jwtValidator, errorsCollector], getAllFromUser);
 router.get("/:ID", [jwtValidator, errorsCollector], getOneById);
+router.get(
+	"/status/:STATUS",
+	[jwtValidator, errorsCollector],
+	getOrdersByStatus
+);
 router.post(
 	"/",
 	[

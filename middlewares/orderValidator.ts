@@ -38,6 +38,7 @@ export const orderValidator = async (
 		res.status(400).json({
 			msg: `El precio de los productos debe ser mayor a 0 (cero)`,
 		});
+		return;
 	}
 
 	next();
