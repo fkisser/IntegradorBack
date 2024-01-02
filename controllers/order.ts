@@ -91,7 +91,7 @@ export const createOrder = async (req: Request, res: Response) => {
 export const updateOrder = async (req: Request, res: Response) => {
 	const { _id } = req.body.user;
 	const { ID } = req.params;
-	const { items, shippingDetails, price }: IOrder = req.body;
+	const { items, shippingDetails, price, status }: IOrder = req.body;
 	const shippingCost = SHIPPING_COST;
 	const total = price + shippingCost;
 	let order = await Order.findById(ID);
@@ -101,9 +101,9 @@ export const updateOrder = async (req: Request, res: Response) => {
 		});
 		return;
 	}
-	if (order?.status !== "pending") {
+	if (order?.status !== "pending" && order?.status !== "cart") {
 		res.status(403).json({
-			msg: "La orden solo puede modificarse si se encuentra en estado pendiente",
+			msg: "La orden solo puede modificarse si se encuentra en estado pendiente o en el carrito",
 			order: order,
 		});
 		return;
@@ -120,7 +120,7 @@ export const updateOrder = async (req: Request, res: Response) => {
 		price,
 		items,
 		shippingDetails,
-		status: "pending",
+		status,
 		total,
 	};
 	let updOrder = await Order.findByIdAndUpdate(ID, orderData, { new: true });
