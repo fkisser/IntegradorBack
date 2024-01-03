@@ -95,9 +95,13 @@ export const updateOrder = async (req: Request, res: Response) => {
 		});
 		return;
 	}
-	if (order?.status !== "pending" && order?.status !== "cart") {
+	if (
+		order?.status !== "pending" &&
+		order?.status !== "cart" &&
+		order?.status !== "checkout"
+	) {
 		res.status(403).json({
-			msg: "La orden solo puede modificarse si se encuentra en estado pendiente o en el carrito",
+			msg: "La orden solo puede modificarse si se encuentra en estado pendiente, en el carrito, o en checkout",
 			order: order,
 		});
 		return;
