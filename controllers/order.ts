@@ -141,9 +141,9 @@ export const deleteOrder = async (req: Request, res: Response) => {
 		});
 		return;
 	}
-	if (order?.status !== "pending") {
+	if (order?.status !== "pending" && order?.status !== "cart") {
 		res.status(403).json({
-			msg: "La orden solo puede eliminarse si se encuentra en estado pendiente, contáctese con una sucursal",
+			msg: "La orden solo puede eliminarse si se encuentra en estado pendiente o en el carrito, contáctese con una sucursal",
 			order: order,
 		});
 		return;
