@@ -53,12 +53,6 @@ export const getOrdersByStatus = async (req: Request, res: Response) => {
 				model: "Product",
 			},
 		});
-	if (!orders.length) {
-		res.status(404).json({
-			msj: "No existen órdenes con este estado para este usuario",
-		});
-		return;
-	}
 	res.status(200).json({
 		orders,
 	});
