@@ -121,7 +121,15 @@ export const updateOrder = async (req: Request, res: Response) => {
 		status,
 		total,
 	};
-	let updOrder = await Order.findByIdAndUpdate(ID, orderData, { new: true });
+	let updOrder = await Order.findByIdAndUpdate(ID, orderData, { new: true })
+		.populate("user")
+		.populate({
+			path: "items",
+			populate: {
+				path: "product",
+				model: "Product",
+			},
+		});
 	res.status(200).json({
 		msg: "Orden modificada con éxito",
 		order: updOrder,
@@ -132,7 +140,15 @@ export const updateOrder = async (req: Request, res: Response) => {
 export const deleteOrder = async (req: Request, res: Response) => {
 	const { _id } = req.body.user;
 	const { ID } = req.params;
-	let order = await Order.findById(ID);
+	let order = await Order.findById(ID)
+		.populate("user")
+		.populate({
+			path: "items",
+			populate: {
+				path: "product",
+				model: "Product",
+			},
+		});
 	if (!order) {
 		res.status(404).json({
 			msg: "La orden no existe",
